@@ -1,0 +1,74 @@
+/* Custom gradient border */
+.border-gradient {
+  border-image: linear-gradient(45deg, #FF6B6B, #2EC4B6, #4B5EAA) 1;
+}
+
+/* Wave background */
+.wave-bg {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100px;
+  background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1440 100" xmlns="http://www.w3.org/2000/svg"><path fill="#FF6B6B" fill-opacity="0.3" d="M0,32L48,37.3C96,43,192,53,288,58.7C384,64,480,64,576,53.3C672,43,768,21,864,16C960,11,1056,21,1152,26.7C1248,32,1344,32,1392,32L1440,32L1440,100L1392,100C1344,100,1248,100,1152,100C1056,100,960,100,864,100C768,100,672,100,576,100C480,100,384,100,288,100C192,100,96,100,48,100L0,100Z"></path></svg>') no-repeat bottom;
+  background-size: cover;
+}
+
+/* Typing effect animation */
+.typing-effect {
+  position: relative;
+  overflow: hidden;
+}
+
+.typing-effect::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(to right, #FF6B6B, #2EC4B6);
+  animation: typing 2s infinite;
+}
+
+@keyframes typing {
+  0% { width: 0; }
+  50% { width: 100%; }
+  100% { width: 0; }
+}
+
+/* Tech orb */
+.tech-orb {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  opacity: 0.3;
+  animation: float 6s ease-in-out infinite;
+}
+
+@media (max-width: 640px) {
+  .tech-orb {
+    width: 30px;
+    height: 30px;
+    top: 10px;
+    right: 10px;
+  }
+}
+
+@keyframes float {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+  100% { transform: translateY(0); }
+}
+
+/* Coral light for dark mode hover */
+.text-coral-light {
+  color: #FF8787;
+}
+
+/* Scrollbar for blog content */
+.blog-content {
+  max-height: 300px;
+  overflow-y: auto;
+}
