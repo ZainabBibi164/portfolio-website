@@ -1,19 +1,25 @@
+import React, { useState, useEffect, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useState, useEffect } from "react";
-import { FaGithub, FaLinkedin, FaReact, FaNodeJs, FaPython, FaHtml5, FaCss3Alt, FaFileDownload } from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaReact, FaNodeJs, FaPython, FaHtml5, FaCss3Alt, FaFileDownload, FaEnvelope } from "react-icons/fa";
 import { SiFlutter, SiFirebase, SiJavascript } from "react-icons/si";
 
-function Home({ isDarkMode, navbarHeight }) {
+function TechOrb({ isDarkMode, style }) {
+  return (
+    <div className={`tech-orb ${isDarkMode ? "bg-teal" : "bg-coral"}`} style={style} />
+  );
+}
+
+function Home({ isDarkMode, navbarHeight, reducedMotion }) {
   const [currentLine, setCurrentLine] = useState(0);
   const [text, setText] = useState("");
   const [isTyping, setIsTyping] = useState(true);
 
-  const lines = [
+  const lines = useMemo(() => [
     "Hi, I'm Zainab 👋",
     "Flutter Developer 📱",
     "Software Engineer 💻",
-    "Innovative Developer💡",
-  ];
+    "Innovative Developer 💡",
+  ], []);
 
   useEffect(() => {
     let index = 0;
@@ -21,6 +27,8 @@ function Home({ isDarkMode, navbarHeight }) {
     let timeoutId = null;
 
     const type = () => {
+      if (lines.length === 0) return; // Error handling: Skip if lines is empty
+
       if (index < lines[currentLine].length) {
         currentText = lines[currentLine].slice(0, index + 1);
         setText(currentText);
@@ -39,58 +47,63 @@ function Home({ isDarkMode, navbarHeight }) {
 
     type();
     return () => clearTimeout(timeoutId);
-  }, [currentLine]);
+  }, [currentLine, lines]);
 
-  const containerVariants = {
+  const containerVariants = useMemo(() => ({
     hidden: { opacity: 0 },
     visible: { opacity: 1, transition: { staggerChildren: 0.3, duration: 0.8 } },
-  };
+  }), []);
 
-  const itemVariants = {
+  const itemVariants = useMemo(() => ({
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
-  };
+  }), []);
 
-  const cardVariants = {
+  const cardVariants = useMemo(() => ({
     hidden: { opacity: 0, x: -50 },
     visible: (i) => ({
       opacity: 1,
       x: 0,
       transition: { duration: 0.6, delay: i * 0.15, ease: "easeOut" },
     }),
-  };
+  }), []);
 
-  const cubeVariants = {
+  const cubeVariants = useMemo(() => ({
     hidden: { opacity: 0, rotateX: 0, rotateY: 0 },
-    visible: { opacity: 1, rotateX: 360, rotateY: 360, transition: { duration: 20, repeat: Infinity, ease: "linear" } },
-  };
+    visible: {
+      opacity: 1,
+      rotateX: reducedMotion ? 0 : 360,
+      rotateY: reducedMotion ? 0 : 360,
+      transition: { duration: 20, repeat: reducedMotion ? 0 : Infinity, ease: "linear" },
+    },
+  }), [reducedMotion]);
 
-  const footerVariants = {
+  const footerVariants = useMemo(() => ({
     hidden: { opacity: 0, y: 50 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } },
-  };
+  }), []);
 
-  const quoteVariants = {
+  const quoteVariants = useMemo(() => ({
     hidden: { opacity: 0, scale: 0.8 },
     visible: { opacity: 1, scale: 1, transition: { duration: 0.8 } },
-  };
+  }), []);
 
-  const skills = [
-    { name: "JavaScript", icon: <SiJavascript className="text-3xl sm:text-4xl text-coral dark:text-white" /> },
-    { name: "React", icon: <FaReact className="text-3xl sm:text-4xl text-teal dark:text-white" /> },
-    { name: "Flutter", icon: <SiFlutter className="text-3xl sm:text-4xl text-indigo dark:text-white" /> },
-    { name: "Firebase", icon: <SiFirebase className="text-3xl sm:text-4xl text-coral dark:text-white" /> },
-    { name: "Node.js", icon: <FaNodeJs className="text-3xl sm:text-4xl text-teal dark:text-white" /> },
-    { name: "Python", icon: <FaPython className="text-3xl sm:text-4xl text-indigo dark:text-white" /> },
-    { name: "HTML", icon: <FaHtml5 className="text-3xl sm:text-4xl text-coral dark:text-white" /> },
-    { name: "CSS", icon: <FaCss3Alt className="text-3xl sm:text-4xl text-teal dark:text-white" /> },
-  ];
+  const skills = useMemo(() => [
+    { name: "JavaScript", icon: <SiJavascript className="text-3xl sm:text-4xl text-coral dark:text-white" aria-hidden="true" />, proficiency: "Advanced" },
+    { name: "React", icon: <FaReact className="text-3xl sm:text-4xl text-teal dark:text-white" aria-hidden="true" />, proficiency: "Expert" },
+    { name: "Flutter", icon: <SiFlutter className="text-3xl sm:text-4xl text-indigo dark:text-white" aria-hidden="true" />, proficiency: "Expert" },
+    { name: "Firebase", icon: <SiFirebase className="text-3xl sm:text-4xl text-coral dark:text-white" aria-hidden="true" />, proficiency: "Advanced" },
+    { name: "Node.js", icon: <FaNodeJs className="text-3xl sm:text-4xl text-teal dark:text-white" aria-hidden="true" />, proficiency: "Intermediate" },
+    { name: "Python", icon: <FaPython className="text-3xl sm:text-4xl text-indigo dark:text-white" aria-hidden="true" />, proficiency: "Intermediate" },
+    { name: "HTML", icon: <FaHtml5 className="text-3xl sm:text-4xl text-coral dark:text-white" aria-hidden="true" />, proficiency: "Expert" },
+    { name: "CSS", icon: <FaCss3Alt className="text-3xl sm:text-4xl text-teal dark:text-white" aria-hidden="true" />, proficiency: "Expert" },
+  ], []);
 
   return (
-    <div className="bg-transparent">
+    <div className="relative">
       <section
-        className="min-h-screen flex flex-col items-center justify-center px-4 py-16 relative"
-        style={{ paddingTop: navbarHeight }}
+        className="min-h-screen flex flex-col items-center justify-center px-4 py-16 glassmorphic-container"
+        style={{ paddingTop: navbarHeight, paddingBottom: 'env(safe-area-inset-bottom)' }}
       >
         <motion.div
           variants={containerVariants}
@@ -100,14 +113,15 @@ function Home({ isDarkMode, navbarHeight }) {
         >
           <motion.h1
             variants={itemVariants}
-            className="text-4xl sm:text-5xl md:text-6xl font-bold text-indigo dark:text-teal mb-4 typing-effect relative"
+            className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-4 typing-effect relative"
             aria-label="Zainab Bibi's Introduction"
+            aria-live="polite"
           >
             {text}
             <AnimatePresence>
               {isTyping && (
                 <motion.span
-                  className="absolute right-0 text-coral dark:text-teal"
+                  className="absolute right-0 text-white"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
@@ -153,7 +167,7 @@ function Home({ isDarkMode, navbarHeight }) {
             <motion.a
               whileHover={{ y: -2 }}
               whileFocus={{ y: -2 }}
-              href="/ZainabBibi_CV.pdf"
+              href="/assets/ZainabBibi_CV.pdf"
               download
               className="px-4 py-2 bg-teal text-gray-900 dark:text-cream rounded-md hover:bg-teal-dark dark:hover:text-coral-light transition-colors text-sm sm:text-base border-2 border-gradient"
               aria-label="Download Zainab's CV"
@@ -162,11 +176,11 @@ function Home({ isDarkMode, navbarHeight }) {
             </motion.a>
           </motion.div>
         </motion.div>
-        <div className={`tech-orb ${isDarkMode ? "bg-teal" : "bg-coral"}`} style={{ top: "20px", right: "20px" }} />
-        <div className="wave-bg" />
+        <TechOrb isDarkMode={isDarkMode} style={{ top: "20px", right: "20px" }} />
+        <div className="wave-bg" aria-hidden="true" />
       </section>
 
-      <section className="py-16 px-4 bg-transparent relative" style={{ paddingTop: navbarHeight }}>
+      <section className="py-16 px-4 glassmorphic-container relative" style={{ paddingTop: navbarHeight }}>
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -174,7 +188,7 @@ function Home({ isDarkMode, navbarHeight }) {
           className="text-center mb-12"
         >
           <h2
-            className="text-3xl sm:text-4xl md:text-5xl font-semibold text-indigo dark:text-teal mb-4 typing-effect"
+            className="text-3xl sm:text-4xl md:text-5xl font-semibold text-indigo dark:text-white mb-4 typing-effect"
             aria-label="Skills Section"
           >
             My Tech Arsenal
@@ -191,14 +205,15 @@ function Home({ isDarkMode, navbarHeight }) {
               initial="hidden"
               animate="visible"
               variants={cardVariants}
-              whileHover={{ scale: 1.05, boxShadow: "0 10px 20px rgba(75, 94, 170, 0.4)" }}
-              className="card p-6 flex flex-col items-center bg-white dark:bg-gray-800 relative overflow-hidden border-2 border-transparent hover:border-gradient"
+              whileHover={{ scale: 1.05, boxShadow: "0 10px 20px rgba(14, 35, 121, 0.4)" }}
+              className="card p-6 flex flex-col items-center bg-white/15 dark:bg-white-100/15 border-2 border-transparent hover:border-gradient"
               role="article"
-              aria-label={`Skill: ${skill.name}`}
+              aria-label={`Skill: ${skill.name}, Proficiency: ${skill.proficiency}`}
             >
               {skill.icon}
               <h3 className="text-lg sm:text-xl font-semibold text-indigo dark:text-teal mt-4">{skill.name}</h3>
-              <div className={`tech-orb ${isDarkMode ? "bg-teal" : "bg-coral"}`} />
+              <p className="text-sm text-gray-900 dark:text-cream">{skill.proficiency}</p>
+              <TechOrb isDarkMode={isDarkMode} style={{}} />
             </motion.div>
           ))}
         </div>
@@ -209,30 +224,47 @@ function Home({ isDarkMode, navbarHeight }) {
           variants={cubeVariants}
         >
           <div className="cube w-full h-full relative transform-style-3d">
-            <div className="cube-face front absolute w-full h-full bg-white dark:bg-gray-800 border-2 border-gradient flex items-center justify-center">
+            <motion.div
+              className="cube-face front absolute w-full h-full bg-white/20 backdrop-blur-md border-2 border-gradient flex items-center justify-center"
+              whileHover={{ scale: 1.05, boxShadow: "0 0 15px rgba(255, 255, 255, 0.5)" }}
+            >
               <FaReact className="text-4xl sm:text-5xl text-teal dark:text-white" />
-            </div>
-            <div className="cube-face back absolute w-full h-full bg-white dark:bg-gray-800 border-2 border-gradient flex items-center justify-center">
+            </motion.div>
+            <motion.div
+              className="cube-face back absolute w-full h-full bg-white/20 backdrop-blur-md border-2 border-gradient flex items-center justify-center"
+              whileHover={{ scale: 1.05, boxShadow: "0 0 15px rgba(255, 255, 255, 0.5)" }}
+            >
               <SiFlutter className="text-4xl sm:text-5xl text-indigo dark:text-white" />
-            </div>
-            <div className="cube-face right absolute w-full h-full bg-white dark:bg-gray-800 border-2 border-gradient flex items-center justify-center">
+            </motion.div>
+            <motion.div
+              className="cube-face right absolute w-full h-full bg-white/20 backdrop-blur-md border-2 border-gradient flex items-center justify-center"
+              whileHover={{ scale: 1.05, boxShadow: "0 0 15px rgba(255, 255, 255, 0.5)" }}
+            >
               <SiFirebase className="text-4xl sm:text-5xl text-coral dark:text-white" />
-            </div>
-            <div className="cube-face left absolute w-full h-full bg-white dark:bg-gray-800 border-2 border-gradient flex items-center justify-center">
+            </motion.div>
+            <motion.div
+              className="cube-face left absolute w-full h-full bg-white/20 backdrop-blur-md border-2 border-gradient flex items-center justify-center"
+              whileHover={{ scale: 1.05, boxShadow: "0 0 15px rgba(255, 255, 255, 0.5)" }}
+            >
               <FaNodeJs className="text-4xl sm:text-5xl text-teal dark:text-white" />
-            </div>
-            <div className="cube-face top absolute w-full h-full bg-white dark:bg-gray-800 border-2 border-gradient flex items-center justify-center">
+            </motion.div>
+            <motion.div
+              className="cube-face top absolute w-full h-full bg-white/20 backdrop-blur-md border-2 border-gradient flex items-center justify-center"
+              whileHover={{ scale: 1.05, boxShadow: "0 0 15px rgba(255, 255, 255, 0.5)" }}
+            >
               <SiJavascript className="text-4xl sm:text-5xl text-coral dark:text-white" />
-            </div>
-            <div className="cube-face bottom absolute w-full h-full bg-white dark:bg-gray-800 border-2 border-gradient flex items-center justify-center">
+            </motion.div>
+            <motion.div
+              className="cube-face bottom absolute w-full h-full bg-white/20 backdrop-blur-md border-2 border-gradient flex items-center justify-center"
+              whileHover={{ scale: 1.05, boxShadow: "0 0 15px rgba(255, 255, 255, 0.5)" }}
+            >
               <FaPython className="text-4xl sm:text-5xl text-indigo dark:text-white" />
-            </div>
+            </motion.div>
           </div>
         </motion.div>
-        <div className="wave-bg" />
       </section>
 
-      <section className="py-16 px-4 bg-transparent relative" style={{ paddingTop: navbarHeight }}>
+      <section className="py-16 px-4 glassmorphic-container relative" style={{ paddingTop: navbarHeight }}>
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -249,14 +281,22 @@ function Home({ isDarkMode, navbarHeight }) {
             variants={itemVariants}
             className="text-sm sm:text-base md:text-lg text-gray-900 dark:text-cream mb-6 leading-relaxed"
           >
-            I’m Zainab Bibi, a Software Engineering student from Lahore, Pakistan, currently in my 7th semester at Superior University. with a passion for crafting innovative digital solutions. My journey began with a curiosity for coding, leading me to master technologies like React, Flutter, and Firebase. I thrive on challenges, whether it's building responsive web apps or creating seamless mobile experiences. When I'm not coding, you can find me exploring new tech trends or sipping chai while brainstorming my next project. My goal? To build impactful software that makes a difference.
+            I'm Zainab Bibi, a Software Engineering student from Lahore, Pakistan, currently in my 7th semester at Superior University. with a passion for crafting innovative digital solutions. My journey began with a curiosity for coding, leading me to master technologies like React, Flutter, and Firebase. I thrive on challenges, whether it's building responsive web apps or creating seamless mobile experiences. When I'm not coding, you can find me exploring new tech trends or sipping chai while brainstorming my next project. My goal? To build impactful software that makes a difference.
           </motion.p>
-          <div className={`tech-orb ${isDarkMode ? "bg-teal" : "bg-coral"}`} style={{ top: "20px", right: "20px" }} />
+          <motion.a
+            whileHover={{ y: -2 }}
+            whileFocus={{ y: -2 }}
+            href="/contact"
+            className="px-4 py-2 bg-teal text-gray-900 dark:text-cream rounded-md hover:bg-teal-dark dark:hover:text-coral-light transition-colors text-sm sm:text-base border-2 border-gradient"
+            aria-label="Navigate to Contact Page"
+          >
+            <FaEnvelope className="mr-2 inline text-gray-900 dark:text-white" /> Contact Me
+          </motion.a>
+          <TechOrb isDarkMode={isDarkMode} style={{ top: "20px", right: "20px" }} />
         </motion.div>
-        <div className="wave-bg" />
       </section>
 
-      <section className="py-12 px-4 bg-transparent relative" style={{ paddingTop: navbarHeight }}>
+      <section className="py-12 px-4 glassmorphic-container relative" style={{ paddingTop: navbarHeight }}>
         <motion.div
           variants={quoteVariants}
           initial="hidden"
@@ -264,16 +304,19 @@ function Home({ isDarkMode, navbarHeight }) {
           className="text-center max-w-3xl mx-auto"
         >
           <h2
-            className="text-2xl sm:text-3xl md:text-4xl font-semibold text-indigo dark:text-sky-950 mb-4"
+            className="text-2xl sm:text-3xl md:text-4xl font-semibold text-indigo dark:text-teal mb-4"
             aria-label="Motivational Quote"
           >
-            “Innovation distinguishes between a leader and a follower.” – Steve Jobs
+            &quot;Innovation distinguishes between a leader and a follower.&quot; – Steve Jobs
           </h2>
-          <div className={`tech-orb ${isDarkMode ? "bg-teal" : "bg-coral"}`} style={{ top: "20px", right: "20px" }} />
+          <p className="text-sm sm:text-base text-gray-900 dark:text-cream">
+            This quote inspires my approach to development, pushing me to create unique solutions in every project.
+          </p>
+          <TechOrb isDarkMode={isDarkMode} style={{ top: "20px", right: "20px" }} />
         </motion.div>
       </section>
 
-      <footer className="py-8 px-4 bg-transparent relative" style={{ paddingTop: navbarHeight }}>
+      <footer className="py-8 px-4 glassmorphic-container relative" style={{ paddingTop: navbarHeight }}>
         <motion.div
           variants={footerVariants}
           initial="hidden"
@@ -310,9 +353,8 @@ function Home({ isDarkMode, navbarHeight }) {
           >
             &copy; {new Date().getFullYear()} Zainab Bibi. All rights reserved.
           </motion.p>
-          <div className={`tech-orb ${isDarkMode ? "bg-teal" : "bg-coral"}`} style={{ top: "20px", right: "20px" }} />
+          <TechOrb isDarkMode={isDarkMode} style={{ top: "20px", right: "20px" }} />
         </motion.div>
-        <div className="wave-bg" />
       </footer>
     </div>
   );

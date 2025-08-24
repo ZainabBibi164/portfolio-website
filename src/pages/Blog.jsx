@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { FaClock } from "react-icons/fa";
+import React from "react";
 
 function Blog({ isDarkMode, navbarHeight }) {
   const sampleBlogs = [

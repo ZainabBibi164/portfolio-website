@@ -7,7 +7,7 @@ module.exports = {
         coral: '#db9a9a',
         'coral-dark': '#E55A5A',
         'coral-light': '#FF8787',
-        teal: '#2EC4B6',
+        teal: '#18dbf5ff',
         'teal-dark': '#27A69A',
         indigo: '#4B5EAA',
         'indigo-dark': '#3F4E8C',

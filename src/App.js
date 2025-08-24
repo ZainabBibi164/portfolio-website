@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import NavBar from "./components/Navbar";
-import PageTransition from "./components/PageTransition";
 import ParticlesBackground from "./components/ParticlesBackground";
 import ErrorBoundary from "./components/ErrorBoundary";
 import Home from "./pages/Home";
@@ -66,8 +65,8 @@ function App() {
           aria-label="Portfolio Content"
           style={{
             background: isDarkMode
-              ? "linear-gradient(135deg, #4B5EAA 0%, #2EC4B6 100%)"
-              : "linear-gradient(135deg, #FF6B6B 0%, #FDF6EC 100%)",
+              ? "linear-gradient(135deg, #689fc4ff 0%, #042925ff 100%)"
+              : "linear-gradient(135deg, #ff8d79ff 0%, #ff7070ff 100%)",
             backgroundSize: "200% 200%",
             animation: reducedMotion ? "none" : "gradientFlow 15s ease-in-out infinite",
           }}
@@ -82,7 +81,7 @@ function App() {
             isDarkMode={isDarkMode}
             setNavbarHeight={setNavbarHeight}
           />
-          <PageTransition>
+          
             <Routes>
               <Route
                 path="/"
@@ -133,7 +132,7 @@ function App() {
                 }
               />
             </Routes>
-          </PageTransition>
+          
         </div>
       </BrowserRouter>
     </ErrorBoundary>

@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { FaSun, FaMoon, FaBars, FaTimes } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import React from "react";
 
 function NavBar({ isDarkMode, toggleDarkMode, setNavbarHeight }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

@@ -1,25 +1,63 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /* Custom gradient border */
 .border-gradient {
-  border-image: linear-gradient(45deg, #FF6B6B, #2EC4B6, #4B5EAA) 1;
+  border-image: linear-gradient(45deg, #FF6B6B, #1f978bff, #4B5EAA) 1;
 }
 
-/* Wave background */
+/* Wave background variations */
 .wave-bg {
   position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 100px;
-  background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1440 100" xmlns="http://www.w3.org/2000/svg"><path fill="#FF6B6B" fill-opacity="0.3" d="M0,32L48,37.3C96,43,192,53,288,58.7C384,64,480,64,576,53.3C672,43,768,21,864,16C960,11,1056,21,1152,26.7C1248,32,1344,32,1392,32L1440,32L1440,100L1392,100C1344,100,1248,100,1152,100C1056,100,960,100,864,100C768,100,672,100,576,100C480,100,384,100,288,100C192,100,96,100,48,100L0,100Z"></path></svg>') no-repeat bottom;
+  height: 200px;
+  background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1440 100" xmlns="http://www.w3.org/2000/svg"><path fill="#FF6B6B" fill-opacity="0.8" d="M0,32L48,37.3C96,43,192,53,288,58.7C384,64,480,64,576,53.3C672,43,768,21,864,16C960,11,1056,21,1152,26.7C1248,32,1344,32,1392,32L1440,32L1440,100L1392,100C1344,100,1248,100,1152,100C1056,100,960,100,864,100C768,100,672,100,576,100C480,100,384,100,288,100C192,100,96,100,48,100L0,100Z"></path></svg>') no-repeat bottom;
   background-size: cover;
+  z-index: 0;
+}
+
+.dark .wave-bg {
+  background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1440 100" xmlns="http://www.w3.org/2000/svg"><path fill="#2EC4B6" fill-opacity="0.8" d="M0,32L48,37.3C96,43,192,53,288,58.7C384,64,480,64,576,53.3C672,43,768,21,864,16C960,11,1056,21,1152,26.7C1248,32,1344,32,1392,32L1440,32L1440,100L1392,100C1344,100,1248,100,1152,100C1056,100,960,100,864,100C768,100,672,100,576,100C480,100,384,100,288,100C192,100,96,100,48,100L0,100Z"></path></svg>') no-repeat bottom;
+}
+
+.wave-bg-variant1 {
+  height: 150px;
+  background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1440 100" xmlns="http://www.w3.org/2000/svg"><path fill="#FF6B6B" fill-opacity="0.6" d="M0,64L48,58.7C96,53,192,43,288,37.3C384,32,480,32,576,42.7C672,53,768,75,864,80C960,85,1056,75,1152,69.3C1248,64,1344,64,1392,64L1440,64L1440,100L1392,100C1344,100,1248,100,1152,100C1056,100,960,100,864,100C768,100,672,100,576,100C480,100,384,100,288,100C192,100,96,100,48,100L0,100Z"></path></svg>') no-repeat bottom;
+}
+
+.dark .wave-bg-variant1 {
+  background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1440 100" xmlns="http://www.w3.org/2000/svg"><path fill="#2EC4B6" fill-opacity="0.6" d="M0,64L48,58.7C96,53,192,43,288,37.3C384,32,480,32,576,42.7C672,53,768,75,864,80C960,85,1056,75,1152,69.3C1248,64,1344,64,1392,64L1440,64L1440,100L1392,100C1344,100,1248,100,1152,100C1056,100,960,100,864,100C768,100,672,100,576,100C480,100,384,100,288,100C192,100,96,100,48,100L0,100Z"></path></svg>') no-repeat bottom;
+}
+
+.wave-bg-variant2 {
+  height: 250px;
+  background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1440 100" xmlns="http://www.w3.org/2000/svg"><path fill="#FF6B6B" fill-opacity="0.9" d="M0,16L48,21.3C96,27,192,37,288,42.7C384,48,480,48,576,37.3C672,27,768,5,864,0C960,-5,1056,5,1152,10.7C1248,16,1344,16,1392,16L1440,16L1440,100L1392,100C1344,100,1248,100,1152,100C1056,100,960,100,864,100C768,100,672,100,576,100C480,100,384,100,288,100C192,100,96,100,48,100L0,100Z"></path></svg>') no-repeat bottom;
+}
+
+.dark .wave-bg-variant2 {
+  background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1440 100" xmlns="http://www.w3.org/2000/svg"><path fill="#2EC4B6" fill-opacity="0.9" d="M0,16L48,21.3C96,27,192,37,288,42.7C384,48,480,48,576,37.3C672,27,768,5,864,0C960,-5,1056,5,1152,10.7C1248,16,1344,16,1392,16L1440,16L1440,100L1392,100C1344,100,1248,100,1152,100C1056,100,960,100,864,100C768,100,672,100,576,100C480,100,384,100,288,100C192,100,96,100,48,100L0,100Z"></path></svg>') no-repeat bottom;
+}
+
+/* Wave background for contact page */
+.wave-bg-contact {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 120px;
+  background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1440 100" xmlns="http://www.w3.org/2000/svg"><path fill="#FF6B6B" fill-opacity="0.6" d="M0,64L48,58.7C96,53,192,43,288,37.3C384,32,480,32,576,42.7C672,53,768,75,864,80C960,85,1056,75,1152,69.3C1248,64,1344,64,1392,64L1440,64L1440,100L1392,100C1344,100,1248,100,1152,100C1056,100,960,100,864,100C768,100,672,100,576,100C480,100,384,100,288,100C192,100,96,100,48,100L0,100Z"></path></svg>') no-repeat bottom;
+  background-size: cover;
+  z-index: 0;
+}
+
+.dark .wave-bg-contact {
+  background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1440 100" xmlns="http://www.w3.org/2000/svg"><path fill="#2EC4B6" fill-opacity="0.6" d="M0,64L48,58.7C96,53,192,43,288,37.3C384,32,480,32,576,42.7C672,53,768,75,864,80C960,85,1056,75,1152,69.3C1248,64,1344,64,1392,64L1440,64L1440,100L1392,100C1344,100,1248,100,1152,100C1056,100,960,100,864,100C768,100,672,100,576,100C480,100,384,100,288,100C192,100,96,100,48,100L0,100Z"></path></svg>') no-repeat bottom;
 }
 
 /* Typing effect animation */
-.typing-effect {
-  position: relative;
-  overflow: hidden;
-}
-
 .typing-effect::after {
   content: '';
   position: absolute;
@@ -27,8 +65,8 @@
   left: 0;
   width: 100%;
   height: 2px;
-  background: linear-gradient(to right, #FF6B6B, #2EC4B6);
-  animation: typing 2s infinite;
+  background: linear-gradient(to right, #FF6B6B, #174775ff);
+  animation: typing 4s infinite;
 }
 
 @keyframes typing {
@@ -45,7 +83,10 @@
   border-radius: 50%;
   opacity: 0.3;
   animation: float 6s ease-in-out infinite;
+  z-index: 1;
 }
+.bg-coral { background-color: #FF6B6B; }
+.bg-teal { background-color: #2EC4B6; }
 
 @media (max-width: 640px) {
   .tech-orb {
@@ -53,6 +94,9 @@
     height: 30px;
     top: 10px;
     right: 10px;
+  }
+  .typing-effect {
+    font-size: 2.5rem !important;
   }
 }
 
@@ -71,4 +115,108 @@
 .blog-content {
   max-height: 300px;
   overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #2EC4B6 #F5F5DC;
+}
+
+.blog-content::-webkit-scrollbar {
+  width: 8px;
+}
+.blog-content::-webkit-scrollbar-track {
+  background: #F5F5DC;
+}
+.blog-content::-webkit-scrollbar-thumb {
+  background: #2ba1c5ff;
+  border-radius: 4px;
+}
+
+/* Glassmorphic container */
+.glassmorphic-container {
+  @apply bg-white/15 dark:bg-gray-800/15 backdrop-blur-xl border border-white/30 dark:border-teal/30 rounded-2xl shadow-2xl;
+  background: linear-gradient(180deg, rgba(255, 245, 238, 0.2), rgba(255, 255, 255, 0.8), rgba(46, 196, 182, 0.1));
+}
+.dark .glassmorphic-container {
+  background: linear-gradient(180deg, rgba(17, 24, 39, 0.2), rgba(31, 41, 55, 0.8), rgba(46, 196, 182, 0.1));
+}
+
+/* Ensure particles canvas is visible for all pages */
+#tsparticles {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  z-index: -1 !important;
+  pointer-events: auto;
+}
+
+/* Screen reader only text */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+/* 3D cube styles */
+.cube-container {
+  perspective: 1000px;
+  --cube-size: 200px;
+}
+@media (min-width: 640px) {
+  .cube-container {
+    --cube-size: 300px;
+  }
+}
+.cube {
+  position: relative;
+  transform-style: preserve-3d;
+  width: var(--cube-size);
+  height: var(--cube-size);
+}
+.cube-face {
+  position: absolute;
+  width: var(--cube-size);
+  height: var(--cube-size);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backface-visibility: hidden;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  border: 2px solid transparent;
+  border-image: linear-gradient(45deg, #FF6B6B, #1f978bff, #4B5EAA) 1;
+}
+.cube-face.front {
+  transform: translateZ(calc(var(--cube-size) / 2));
+}
+.cube-face.back {
+  transform: rotateY(180deg) translateZ(calc(var(--cube-size) / 2));
+}
+.cube-face.right {
+  transform: rotateY(90deg) translateZ(calc(var(--cube-size) / 2));
+}
+.cube-face.left {
+  transform: rotateY(-90deg) translateZ(calc(var(--cube-size) / 2));
+}
+.cube-face.top {
+  transform: rotateX(90deg) translateZ(calc(var(--cube-size) / 2));
+}
+.cube-face.bottom {
+  transform: rotateX(-90deg) translateZ(calc(var(--cube-size) / 2));
+}
+
+/* Ensure sections are above particles and wave backgrounds */
+section, footer {
+  position: relative;
+  z-index: 1;
+}
+
+/* Improved color contrasts */
+.text-gray-900 {
+  color: #111827;
 }
